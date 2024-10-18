@@ -2,11 +2,10 @@
 
 import { connectDb } from "../mongoose"
 import User from "../models/user.model"
-import { userInfo } from "os";
 import { revalidatePath } from "next/cache";
 import Thread from "../models/thread.model";
-import { get } from "http";
 import { FilterQuery, SortOrder } from "mongoose";
+import Community from "../models/community.model";
 
 
 
@@ -55,7 +54,11 @@ export async function getUser(userId: string) {
     connectDb();
     try {
         return await User.findOne({ id: userId })
-        //.populate('communities')
+            .populate({
+                path: "communities",
+                model: Community,
+
+            })
     } catch (error: any) {
         throw new Error(`fail to get user ${error.message}`);
     }
@@ -69,16 +72,24 @@ export async function fetchUserPosts(userId: string) {
             .populate({
                 path: 'threads',
                 model: Thread,
-                populate: {
-                    path: 'children',
-                    model: Thread,
-                    populate: {
-                        path: 'author',
-                        model: User,
-                        select: "name image id"
-                    }
-                }
-            })
+                populate: [
+                    {
+                        path: "community",
+                        model: Community,
+                        select: "name id image _id", // Select the "name" and "_id" fields from the "Community" model
+                    },
+                    {
+                        path: "children",
+                        model: Thread,
+                        populate: {
+                            path: "author",
+                            model: User,
+                            select: "name image id", // Select the "name" and "_id" fields from the "User" model
+                        },
+                    },
+                ],
+            });
+
         return threads;
 
     } catch (error: any) {
@@ -107,6 +118,7 @@ export async function getAllUsers({
         const query: FilterQuery<typeof User> = {
             id: { $ne: userId },
         }
+        // If the search string is not empty, add the $or operator to match either username or name fields.
         if (searchString.trim() !== '') {
             query.$or = [
                 { name: regex },
