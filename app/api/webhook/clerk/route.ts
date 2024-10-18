@@ -37,7 +37,7 @@ type Event = {
 export const POST = async (request: Request) => {
     const payload = await request.json();
     const header = headers();
-    //verify the webhook
+
     const heads = {
         "svix-id": header.get("svix-id"),
         "svix-timestamp": header.get("svix-timestamp"),
@@ -46,7 +46,7 @@ export const POST = async (request: Request) => {
 
     // Activitate Webhook in the Clerk Dashboard.
     // After adding the endpoint, you'll see the secret on the right side.
-    const wh = new Webhook(process.env.CLERK_WEBHOOK_SECRET || "");
+    const wh = new Webhook(process.env.NEXT_CLERK_WEBHOOK_SECRET || "");
 
     let evnt: Event | null = null;
 
@@ -60,14 +60,11 @@ export const POST = async (request: Request) => {
     }
 
     const eventType: EventType = evnt?.type!;
-    console.log("Received event type:", eventType);
-
 
     // Listen organization creation event
     if (eventType === "organization.created") {
         // Resource: https://clerk.com/docs/reference/backend-api/tag/Organizations#operation/CreateOrganization
         // Show what evnt?.data sends from above resource
-        console.log("Organization created event received:", evnt?.data);
         const { id, name, slug, logo_url, image_url, created_by } =
             evnt?.data ?? {};
 
