@@ -6,6 +6,7 @@ export default async function Home() {
   const result = await fetchPosts(1, 30);
   const user = await currentUser();
   //console.log(result);
+  console.log("CLERK_WEBHOOK_SECRET:", process.env.CLERK_WEBHOOK_SECRET);
   return (
     <>
       <h1 className="head-text text-left">

@@ -6,6 +6,8 @@
 // It's a good practice to verify webhooks. Above article shows why we should do it
 import { Webhook, WebhookRequiredHeaders } from "svix";
 import { headers } from "next/headers";
+import { createTestUser } from "@/lib/actions/user.actions";
+
 
 import { IncomingHttpHeaders } from "http";
 
@@ -36,49 +38,60 @@ type Event = {
 
 export const POST = async (request: Request) => {
     const payload = await request.json();
+    console.log("Webhook event received:", payload);
     const header = headers();
+    const webhookSecret = process.env.CLERK_WEBHOOK_SECRET;
 
+    if (!webhookSecret) {
+        console.error("CLERK_WEBHOOK_SECRET is missing or not set!");
+        return NextResponse.json({ message: "Internal Server Error: Missing Webhook Secret" }, { status: 500 });
+    }
     const heads = {
         "svix-id": header.get("svix-id"),
         "svix-timestamp": header.get("svix-timestamp"),
         "svix-signature": header.get("svix-signature"),
     };
 
-    // Activitate Webhook in the Clerk Dashboard.
-    // After adding the endpoint, you'll see the secret on the right side.
-    const wh = new Webhook(process.env.NEXT_CLERK_WEBHOOK_SECRET || "");
+    console.log("Received headers:", {
+        "svix-id": header.get("svix-id"),
+        "svix-timestamp": header.get("svix-timestamp"),
+        "svix-signature": header.get("svix-signature"),
+    });
+
 
     let evnt: Event | null = null;
 
     try {
+        // Webhook verification using svix
+        const wh = new Webhook(webhookSecret);
         evnt = wh.verify(
             JSON.stringify(payload),
             heads as IncomingHttpHeaders & WebhookRequiredHeaders
         ) as Event;
         console.log("Webhook event verified successfully:", evnt);
     } catch (err) {
-        return NextResponse.json({ message: err }, { status: 400 });
+        console.error("Webhook verification failed:", err);
+        return NextResponse.json({ message: "Invalid signature" }, { status: 400 });
     }
 
     const eventType: EventType = evnt?.type!;
     console.log("Event type:", eventType);
 
-    // Listen organization creation event
-    if (eventType === "organization.created") {
-        // Resource: https://clerk.com/docs/reference/backend-api/tag/Organizations#operation/CreateOrganization
-        // Show what evnt?.data sends from above resource
-        console.log("Attempting to create community with ID:", evnt?.data.id);
-        const { id, name, slug, logo_url, image_url, created_by } =
-            evnt?.data ?? {};
 
+    if (eventType === "organization.created") {
+        console.log("Organization created event received:", evnt?.data);
+        const { id, name, slug, logo_url, image_url, created_by } = evnt?.data ?? {};
+
+        // Proceed with creating the community
         try {
+            console.log("Attempting to create community with ID:", id);
             const community = await createCommunity(
-                id as string,
-                name as string,
-                slug as string,
-                (logo_url || image_url) as string,
-                "org bio",
-                created_by as string
+                id,
+                name,
+                slug,
+                logo_url || image_url,
+                "org bio", // Replace if there is more meaningful data
+                created_by
             );
             console.log("Community created successfully:", community);
             return NextResponse.json({ message: "Community created successfully" }, { status: 201 });
@@ -118,7 +131,8 @@ export const POST = async (request: Request) => {
             const { organization, public_user_data } = evnt?.data;
             console.log("created", evnt?.data);
 
-            await addMemberToCommunity(organization.id as string, public_user_data.user_id as string);
+            // @ts-ignore
+            await addMemberToCommunity(organization.id, public_user_data.user_id);
 
             return NextResponse.json(
                 { message: "Invitation accepted" },
@@ -142,7 +156,8 @@ export const POST = async (request: Request) => {
             const { organization, public_user_data } = evnt?.data;
             console.log("removed", evnt?.data);
 
-            await removeUserFromCommunity(public_user_data.user_id as string, organization.id as string);
+            // @ts-ignore
+            await removeUserFromCommunity(public_user_data.user_id, organization.id);
 
             return NextResponse.json({ message: "Member removed" }, { status: 201 });
         } catch (err) {
@@ -163,9 +178,10 @@ export const POST = async (request: Request) => {
             const { id, logo_url, name, slug } = evnt?.data;
             console.log("updated", evnt?.data);
 
-            await updateCommunityInfo(id as string, name as string, slug as string, logo_url as string);
+            // @ts-ignore
+            await updateCommunityInfo(id, name, slug, logo_url);
 
-            return NextResponse.json({ message: "Organization updated" }, { status: 201 });
+            return NextResponse.json({ message: "Member removed" }, { status: 201 });
         } catch (err) {
             console.log(err);
 
@@ -184,7 +200,8 @@ export const POST = async (request: Request) => {
             const { id } = evnt?.data;
             console.log("deleted", evnt?.data);
 
-            await deleteCommunity(id as string);
+            // @ts-ignore
+            await deleteCommunity(id);
 
             return NextResponse.json(
                 { message: "Organization deleted" },
