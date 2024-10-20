@@ -55,38 +55,36 @@ export const POST = async (request: Request) => {
             JSON.stringify(payload),
             heads as IncomingHttpHeaders & WebhookRequiredHeaders
         ) as Event;
+        console.log("Webhook event verified successfully:", evnt);
     } catch (err) {
         return NextResponse.json({ message: err }, { status: 400 });
     }
 
     const eventType: EventType = evnt?.type!;
+    console.log("Event type:", eventType);
 
     // Listen organization creation event
     if (eventType === "organization.created") {
         // Resource: https://clerk.com/docs/reference/backend-api/tag/Organizations#operation/CreateOrganization
         // Show what evnt?.data sends from above resource
+        console.log("Attempting to create community with ID:", evnt?.data.id);
         const { id, name, slug, logo_url, image_url, created_by } =
             evnt?.data ?? {};
 
         try {
-            // @ts-ignore
-            await createCommunity(
-                // @ts-ignore
-                id,
-                name,
-                slug,
-                logo_url || image_url,
+            const community = await createCommunity(
+                id as string,
+                name as string,
+                slug as string,
+                (logo_url || image_url) as string,
                 "org bio",
-                created_by
+                created_by as string
             );
-
-            return NextResponse.json({ message: "User created" }, { status: 201 });
+            console.log("Community created successfully:", community);
+            return NextResponse.json({ message: "Community created successfully" }, { status: 201 });
         } catch (err) {
-            console.log(err);
-            return NextResponse.json(
-                { message: "Internal Server Error" },
-                { status: 500 }
-            );
+            console.error("Error creating community:", err);
+            return NextResponse.json({ message: "Internal Server Error" }, { status: 500 });
         }
     }
 
@@ -120,8 +118,7 @@ export const POST = async (request: Request) => {
             const { organization, public_user_data } = evnt?.data;
             console.log("created", evnt?.data);
 
-            // @ts-ignore
-            await addMemberToCommunity(organization.id, public_user_data.user_id);
+            await addMemberToCommunity(organization.id as string, public_user_data.user_id as string);
 
             return NextResponse.json(
                 { message: "Invitation accepted" },
@@ -145,8 +142,7 @@ export const POST = async (request: Request) => {
             const { organization, public_user_data } = evnt?.data;
             console.log("removed", evnt?.data);
 
-            // @ts-ignore
-            await removeUserFromCommunity(public_user_data.user_id, organization.id);
+            await removeUserFromCommunity(public_user_data.user_id as string, organization.id as string);
 
             return NextResponse.json({ message: "Member removed" }, { status: 201 });
         } catch (err) {
@@ -167,10 +163,9 @@ export const POST = async (request: Request) => {
             const { id, logo_url, name, slug } = evnt?.data;
             console.log("updated", evnt?.data);
 
-            // @ts-ignore
-            await updateCommunityInfo(id, name, slug, logo_url);
+            await updateCommunityInfo(id as string, name as string, slug as string, logo_url as string);
 
-            return NextResponse.json({ message: "Member removed" }, { status: 201 });
+            return NextResponse.json({ message: "Organization updated" }, { status: 201 });
         } catch (err) {
             console.log(err);
 
@@ -189,8 +184,7 @@ export const POST = async (request: Request) => {
             const { id } = evnt?.data;
             console.log("deleted", evnt?.data);
 
-            // @ts-ignore
-            await deleteCommunity(id);
+            await deleteCommunity(id as string);
 
             return NextResponse.json(
                 { message: "Organization deleted" },

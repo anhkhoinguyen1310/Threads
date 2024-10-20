@@ -55,41 +55,50 @@ interface Params {
     path: string,
 }
 
-export async function createThread({ text, author, communityId, path }: Params
-) {
+export async function createThread({ text, author, communityId, path }: Params) {
     try {
         connectDb();
         console.log("Community ID passed to createThread:", communityId);
+
+        // Lookup community by ID
         const communityIdObject = await Community.findOne(
             { id: communityId },
             { _id: 1 }
         );
+
+        // Handle the case when the community is not found
+        if (!communityIdObject) {
+            throw new Error(`Community with ID ${communityId} not found`);
+        }
+
         console.log("Community Object found:", communityIdObject);
 
+        // Create the thread with the community reference
         const createdThread = await Thread.create({
             text,
             author,
-            community: communityIdObject, // Assign communityId if provided, or leave it null for personal account
+            community: communityIdObject._id, // Correct reference using ObjectId
         });
 
+        console.log("Thread successfully created:", createdThread);
 
-        // Update User model
+        // Update User model with the new thread
         await User.findByIdAndUpdate(author, {
             $push: { threads: createdThread._id },
         });
 
-        if (communityIdObject) {
-            // Update Community model
-            await Community.findByIdAndUpdate(communityIdObject, {
-                $push: { threads: createdThread._id },
-            });
-        }
+        // Update Community model with the new thread
+        await Community.findByIdAndUpdate(communityIdObject._id, {
+            $push: { threads: createdThread._id },
+        });
 
         revalidatePath(path);
     } catch (error: any) {
+        console.error(`Failed to create thread: ${error.message}`);
         throw new Error(`Failed to create thread: ${error.message}`);
     }
 }
+
 
 async function fetchAllChildThreads(threadId: string): Promise<any[]> {
     const childThreads = await Thread.find({ parentId: threadId });

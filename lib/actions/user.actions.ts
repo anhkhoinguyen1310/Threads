@@ -157,3 +157,24 @@ export async function getActivities(userId: string) {
         throw new Error(`fail to get activities ${error.message}`);
     }
 }
+
+
+export const createTestUser = async () => {
+    await connectDb();
+    const existingUser = await User.findOne({ id: "user_test123" });
+
+    if (!existingUser) {
+        const newUser = new User({
+            id: "user_test123",
+            name: "Test User",
+            username: "testuser123",
+            bio: "This is a test user.",
+            image: "https://example.com/user.png",
+        });
+
+        await newUser.save();
+        console.log("Test user created successfully.");
+    } else {
+        console.log("Test user already exists.");
+    }
+};

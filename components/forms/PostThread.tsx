@@ -57,6 +57,7 @@ export const PostThread = ({ userId }: { userId: string }) => {
             communityId: organization ? organization.id : null,
             path: pathname,
         });
+
         router.push("/")
     }
     return (
