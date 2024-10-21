@@ -6,6 +6,7 @@ import LeftSideBar from "@/components/shared/LeftSideBar";
 import RightSideBar from "@/components/shared/RightSideBar";
 import BottomBar from "@/components/shared/BottomBar";
 import { ClerkProvider } from "@clerk/nextjs";
+import { Toaster } from "react-hot-toast";
 
 const geistSans = localFont({
   src: "../fonts/GeistVF.woff",
@@ -42,6 +43,7 @@ export default function RootLayout({
             <LeftSideBar />
             <section className="main-container">
               <div className="w-full max-w-4xl">
+                <Toaster position="top-center" />
                 {children}
               </div>
             </section>

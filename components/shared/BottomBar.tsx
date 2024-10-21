@@ -4,7 +4,6 @@ import Link from 'next/link';
 import React from 'react'
 import Image from 'next/image'
 import { usePathname } from 'next/navigation'
-import { SignedIn, SignOutButton, useAuth, SignInButton, SignedOut } from '@clerk/nextjs';
 
 function BottomBar() {
     const pathname = usePathname();

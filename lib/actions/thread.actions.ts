@@ -60,24 +60,28 @@ export async function createThread({ text, author, communityId, path }: Params) 
         connectDb();
         console.log("Community ID passed to createThread:", communityId);
 
-        // Lookup community by ID
-        const communityIdObject = await Community.findOne(
-            { id: communityId },
-            { _id: 1 }
-        );
+        let communityIdObject = null;
 
-        // Handle the case when the community is not found
-        if (!communityIdObject) {
-            throw new Error(`Community with ID ${communityId} not found`);
+        // Only attempt to lookup the community if a communityId is provided
+        if (communityId) {
+            communityIdObject = await Community.findOne(
+                { id: communityId },
+                { _id: 1 }
+            );
+
+            // Handle the case when the community is not found
+            if (!communityIdObject) {
+                throw new Error(`Community with ID ${communityId} not found`);
+            }
+
+            console.log("Community Object found:", communityIdObject);
         }
 
-        console.log("Community Object found:", communityIdObject);
-
-        // Create the thread with the community reference
+        // Create the thread with or without the community reference
         const createdThread = await Thread.create({
             text,
             author,
-            community: communityIdObject._id, // Correct reference using ObjectId
+            community: communityIdObject ? communityIdObject._id : undefined, // Only set if community exists
         });
 
         console.log("Thread successfully created:", createdThread);
@@ -87,10 +91,12 @@ export async function createThread({ text, author, communityId, path }: Params) 
             $push: { threads: createdThread._id },
         });
 
-        // Update Community model with the new thread
-        await Community.findByIdAndUpdate(communityIdObject._id, {
-            $push: { threads: createdThread._id },
-        });
+        // Update Community model with the new thread only if a community exists
+        if (communityIdObject) {
+            await Community.findByIdAndUpdate(communityIdObject._id, {
+                $push: { threads: createdThread._id },
+            });
+        }
 
         revalidatePath(path);
     } catch (error: any) {
@@ -98,6 +104,7 @@ export async function createThread({ text, author, communityId, path }: Params) 
         throw new Error(`Failed to create thread: ${error.message}`);
     }
 }
+
 
 
 async function fetchAllChildThreads(threadId: string): Promise<any[]> {
