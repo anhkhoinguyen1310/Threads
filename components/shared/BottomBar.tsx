@@ -28,20 +28,6 @@ function BottomBar() {
                         </Link>
                     )
                 })}
-
-                <SignedOut>
-                    <SignInButton signUpForceRedirectUrl="/sign-in">
-                        <div className="bottombar_link flex items-center cursor-pointer p-2">
-                            <Image src="/assets/login.svg"
-                                alt="login"
-                                width={24}
-                                height={24} />
-                            <p className="text-subtle-medium text-light-1 max-sm:hidden">
-                                Sign-In
-                            </p>
-                        </div>
-                    </SignInButton>
-                </SignedOut>
             </div>
         </section>
     )
