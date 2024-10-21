@@ -8,6 +8,8 @@ interface Props {
     username: string;
     imgUrl: string;
     bio: string;
+    type?: string;
+
 }
 const ProfileHeader = ({
     accountId,
@@ -15,7 +17,9 @@ const ProfileHeader = ({
     name,
     username,
     imgUrl,
-    bio
+    bio,
+    type,
+
 }: Props) => {
     return (
         //structure for the username and name
