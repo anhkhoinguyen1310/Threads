@@ -4,7 +4,7 @@ import { sidebarLinks } from '@/constants/index'
 import Link from 'next/link'
 import Image from 'next/image'
 import { usePathname, useRouter } from 'next/navigation'
-import { SignedIn, SignOutButton, useAuth } from '@clerk/nextjs';
+import { SignedIn, SignOutButton, useAuth, SignInButton, SignedOut } from '@clerk/nextjs';
 
 
 function LeftSideBar() {
@@ -29,9 +29,24 @@ function LeftSideBar() {
                                 {link.label}
                             </p>
                         </Link>
+
                     )
                 })}
             </div>
+            <div className="mt-10 px-6">
+                <SignedOut>
+                    <SignInButton signUpForceRedirectUrl="/sign-in">
+                        <div className="flex cursor-pointer gap-4 p-4">
+                            <Image src="/assets/login.svg"
+                                alt="logout"
+                                width={24}
+                                height={24} />
+                            <p className="text-light-2 max-lg:hidden"> Sign-In</p>
+                        </div>
+                    </SignInButton>
+                </SignedOut>
+            </div>
+
             <div className="mt-10 px-6">
                 <SignedIn>
                     <SignOutButton redirectUrl="/sign-in">
