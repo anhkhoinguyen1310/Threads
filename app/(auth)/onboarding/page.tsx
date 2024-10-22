@@ -8,7 +8,11 @@ async function Page() {
     if (!user) return null;
 
     const userInfo = await getUser(user.id);
-    if (!userInfo?.onboarded) redirect('/');
+    if (userInfo?.onboarded) {
+        redirect('/');
+        return null; // Prevent rendering further
+    }
+
     const userData = {
         id: user?.id || "",
         objectId: userInfo?.id || "",
