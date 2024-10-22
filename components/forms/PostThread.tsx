@@ -68,7 +68,7 @@ export const PostThread = ({ userId }: { userId: string }) => {
                     control={form.control}
                     name="thread"
                     render={({ field }) => (
-                        <FormItem className='flex flex-col  w-full gap-3'>
+                        <FormItem className='flex flex-col w-full gap-3'>
                             <FormLabel className='text-base-semibold text-light-2'>
                                 Content
                             </FormLabel>

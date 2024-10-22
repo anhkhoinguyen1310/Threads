@@ -7,6 +7,8 @@ import { connectDb } from "../mongoose";
 import User from "../models/user.model";
 import Thread from "../models/thread.model";
 import Community from "../models/community.model";
+import mongoose from "mongoose";
+
 
 export async function fetchPosts(pageNumber = 1, pageSize = 20) {
     connectDb();
@@ -104,7 +106,43 @@ export async function createThread({ text, author, communityId, path }: Params) 
         throw new Error(`Failed to create thread: ${error.message}`);
     }
 }
+interface EditParams {
+    threadId: string;
+    newText: string;
+    path: string;
+}
 
+
+export async function editThread({ threadId, newText, path }: EditParams) {
+    try {
+        connectDb();
+
+        // Convert the threadId to a MongoDB ObjectId
+        const objectId = new mongoose.Types.ObjectId(threadId);
+
+
+        // Find the thread by ID
+        const thread = await Thread.findById(threadId);
+
+        if (!thread) {
+            throw new Error("Thread not found");
+        }
+
+        // Update the text of the thread
+        thread.text = newText;
+
+        // Save the updated thread
+        await thread.save();
+
+        // Revalidate the path to update the cache
+        revalidatePath(path);
+
+        console.log("Thread successfully updated:", thread);
+    } catch (error: any) {
+        console.error(`Failed to edit thread: ${error.message}`);
+        throw new Error(`Failed to edit thread: ${error.message}`);
+    }
+}
 
 
 async function fetchAllChildThreads(threadId: string): Promise<any[]> {

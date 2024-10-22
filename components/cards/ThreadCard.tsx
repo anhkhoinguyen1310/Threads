@@ -4,6 +4,7 @@ import React from 'react'
 
 import { formatDateString } from '@/lib/utils';
 import DeleteThread from "../forms/DeleteThread";
+import EditThread from '../forms/EditThread';
 
 interface Props {
     id: string;
@@ -94,6 +95,12 @@ const ThreadCard = (
                         </div>
                     </div>
                 </div>
+                <EditThread
+                    threadId={(id)}
+                    currentUserId={currentUserId}
+                    authorId={author.id}
+                    initialText={content}
+                />
                 <DeleteThread
                     threadId={JSON.stringify(id)}
                     currentUserId={currentUserId}
