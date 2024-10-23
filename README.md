@@ -1,6 +1,7 @@
 <div align="center">
-  <h3 align="center">BetterThread: A Thread But Just Better</h3>
   <img src="https://github.com/anhkhoinguyen1310/Threads/blob/main/threadPic/ProfilePage.png?raw=true" alt="Threads App Screenshot" width="600"/>
+  <br/>
+   <h3 align="center">BetterThread: A Thread But Just Better</h3>
 </div>
 
 ## 📋 Table of Contents
