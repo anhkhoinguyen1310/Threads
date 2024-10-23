@@ -1,14 +1,14 @@
 <div align="center">
   <h3 align="center">BetterThread: A Thread But Just Better</h3>
-  <img src="/mnt/data/Screenshot%202024-10-23%20at%203.55.29%20PM.png" alt="Threads App Screenshot" width="600"/>
+  <img src="https://github.com/anhkhoinguyen1310/Threads/blob/main/threadPic/ProfilePage.png?raw=true" alt="Threads App Screenshot" width="600"/>
 </div>
 
 ## 📋 Table of Contents
 
-1. 🤖 [Introduction](#introduction)
-2. ⚙️ [Tech Stack](#tech-stack)
-3. 🔋 [Features](#features)
-4. 🤸 [Quick Start](#quick-start)
+1. ⚙️ [Tech Stack](#tech-stack)
+2. 🔋 [Features](#features)
+3. 🤸 [Quick Start](#quick-start)
+4. 🤖 [Sneak Pics](#sneak-peak)
 5. 🚀 [Production](#Production)
 
 ## ⚙️ Tech Stack
@@ -79,6 +79,15 @@ Replace the placeholder values with your actual credentials. You can obtain thes
 ```bash
 npm run dev
 ```
+
+## 🤖 [Sneak Pics]
+
+<div style="display: flex; overflow-x: auto;">
+  <img src="https://github.com/anhkhoinguyen1310/Threads/blob/main/threadPic/profilePhone.png?raw=true" alt="Profile Page" width="300" style="margin-right: 10px;">
+  <img src="https://github.com/anhkhoinguyen1310/Threads/blob/main/threadPic/communityPhone.png?raw=true" alt="Community Page" width="300" style="margin-right: 10px;">
+  <img src="https://github.com/anhkhoinguyen1310/Threads/blob/main/threadPic/responsive.png?raw=true" alt="Responsive Design" width="300" style="margin-right: 10px;">
+  <img src="https://github.com/anhkhoinguyen1310/Threads/blob/main/threadPic/searchPhone.png?raw=true" alt="Search Page" width="300" style="margin-right: 10px;">
+</div>
 
 ## 🚀 Production
 
