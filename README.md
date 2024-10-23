@@ -10,10 +10,9 @@
 2. 🔋 [Features](#features)
 3. 🤸 [Quick Start](#quick-start)
 4. 🤖 [Sneak Pics](#sneak-peak)
-5. 🚀 [Production](#Production)
+5. 🚀 [Production](#production)
 
-## ⚙️ Tech Stack
-
+## <a name="tech-stack"> ⚙️ Tech Stack</a>
 - Next.js
 - MongoDB
 - Shadcn UI
@@ -25,7 +24,7 @@
 - Zod
 - TypeScript
 
-## 🔋 Features
+## <a name="features"> 🔋 Features</a>
 
 - **Authentication**: Login with Clerk for email, Google, and GitHub.
 - **Home Page**: Engaging display of latest threads.
@@ -40,7 +39,7 @@
 - **Real-Time Updates**: Webhooks for event updates.
 - **File Uploads**: Upload media with UploadThing.
 
-## 🤸 Quick Start
+## <a name="quick-start"> 🤸 Quick Start</a> 
 
 **Cloning the Repository**
 
@@ -81,7 +80,7 @@ Replace the placeholder values with your actual credentials. You can obtain thes
 npm run dev
 ```
 
-## 🤖 [Sneak Pics]
+## <a name="sneak-peak"> 🤖 [Sneak Pics]</a> 
 
 <div style="display: flex; overflow-x: auto;">
   <img src="https://github.com/anhkhoinguyen1310/Threads/blob/main/threadPic/profilePhone.png?raw=true" alt="Profile Page" width="300" style="margin-right: 10px;">
@@ -90,7 +89,7 @@ npm run dev
   <img src="https://github.com/anhkhoinguyen1310/Threads/blob/main/threadPic/searchPhone.png?raw=true" alt="Search Page" width="300" style="margin-right: 10px;">
 </div>
 
-## 🚀 Production
+## <a name="production"> 🚀 [Production ]</a>  
 
 Check it Out: [Live Production](https://betterthreads.vercel.app/)
 
