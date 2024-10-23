@@ -1,36 +1,86 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+<div align="center">
+  <h3 align="center">BetterThread: A Thread But Just Better</h3>
+  <img src="/mnt/data/Screenshot%202024-10-23%20at%203.55.29%20PM.png" alt="Threads App Screenshot" width="600"/>
+</div>
 
-## Getting Started
+## 📋 Table of Contents
 
-First, run the development server:
+1. 🤖 [Introduction](#introduction)
+2. ⚙️ [Tech Stack](#tech-stack)
+3. 🔋 [Features](#features)
+4. 🤸 [Quick Start](#quick-start)
+5. 🚀 [Production](#Production)
+
+## ⚙️ Tech Stack
+
+- Next.js
+- MongoDB
+- Shadcn UI
+- TailwindCSS
+- Clerk
+- Webhooks
+- Serverless APIs
+- React Hook Form
+- Zod
+- TypeScript
+
+## 🔋 Features
+
+- **Authentication**: Login with Clerk for email, Google, and GitHub.
+- **Home Page**: Engaging display of latest threads.
+- **Create Thread**: Dedicated page to post new threads.
+- **Commenting**: Discuss threads with nested comments.
+- **User Search**: Find users easily with pagination.
+- **Activity Notifications**: Get notified about comments.
+- **Profile Management**: Customize user profile settings.
+- **Community Creation**: Make new communities, invite via email.
+- **Admin Tools**: Create admin-only threads for communities.
+- **Community Search**: Find and explore different communities.
+- **Real-Time Updates**: Webhooks for event updates.
+- **File Uploads**: Upload media with UploadThing.
+
+## 🤸 Quick Start
+
+**Cloning the Repository**
+
+```bash
+git clone https://github.com/anhkhoinguyen1310/Threads.git
+cd threads
+```
+
+**Installation**
+
+Install the project dependencies using npm:
+
+```bash
+npm install
+```
+
+**Set Up Environment Variables**
+
+Create a new file named `.env` in the root of your project and add the following content:
+
+```env
+NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY
+CLERK_SECRET_KEY
+CLERK_WEBHOOK_SECRET
+NEXT_PUBLIC_CLERK_SIGN_IN_URL
+NEXT_PUBLIC_CLERK_SIGN_UP_URL
+NEXT_PUBLIC_CLERK_AFTER_SIGN_IN_URL
+NEXT_PUBLIC_CLERK_AFTER_SIGN_UP_URL
+MONGODB_URL
+UPLOADTHING_TOKEN
+```
+
+Replace the placeholder values with your actual credentials. You can obtain these credentials by signing up for the corresponding websites on [MongoDB](https://www.mongodb.com/), [Clerk](https://clerk.com/), and [Uploadthing](https://uploadthing.com/).
+
+**Running the Project**
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 🚀 Production
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Check it Out: [Live Production](https://betterthreads.vercel.app/)
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
