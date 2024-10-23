@@ -1,5 +1,5 @@
 <div align="center">
-  <img src="https://github.com/anhkhoinguyen1310/Threads/blob/main/threadPic/ProfilePage.png?raw=true" alt="Threads App Screenshot" width="600"/>
+  <img src="https://private-user-images.githubusercontent.com/151519281/293174555-a9cd1088-968b-4b1d-b21a-f5f97d0c202b.png?jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbSIsImtleSI6ImtleTUiLCJleHAiOjE3Mjk3MTY2NDIsIm5iZiI6MTcyOTcxNjM0MiwicGF0aCI6Ii8xNTE1MTkyODEvMjkzMTc0NTU1LWE5Y2QxMDg4LTk2OGItNGIxZC1iMjFhLWY1Zjk3ZDBjMjAyYi5wbmc_WC1BbXotQWxnb3JpdGhtPUFXUzQtSE1BQy1TSEEyNTYmWC1BbXotQ3JlZGVudGlhbD1BS0lBVkNPRFlMU0E1M1BRSzRaQSUyRjIwMjQxMDIzJTJGdXMtZWFzdC0xJTJGczMlMkZhd3M0X3JlcXVlc3QmWC1BbXotRGF0ZT0yMDI0MTAyM1QyMDQ1NDJaJlgtQW16LUV4cGlyZXM9MzAwJlgtQW16LVNpZ25hdHVyZT0yN2MzNzY0OTY0NmM2ZDliZjAyODUxZTQ1ZTE3MTY2Mjk3NzEyNzI3Yjg2ZTI5YzVmY2UxNDI2MDVjZWYzNjU3JlgtQW16LVNpZ25lZEhlYWRlcnM9aG9zdCJ9.e-K92caylXWlGccMekQBRyrPtAU10EGZIoeMwo6fJaM" alt="Threads App Screenshot" "/>
   <br/>
    <h3 align="center">BetterThread: A Thread But Just Better</h3>
 </div>
