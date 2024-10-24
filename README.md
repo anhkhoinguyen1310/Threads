@@ -1,6 +1,6 @@
 <div align="center">
   <h3 align="center">BetterThread: A Thread But Just Better</h3>
-  <img src="/mnt/data/Screenshot%202024-10-23%20at%203.55.29%20PM.png" alt="Threads App Screenshot" width="600"/>
+  <img src="https://private-user-images.githubusercontent.com/151519281/293174555-a9cd1088-968b-4b1d-b21a-f5f97d0c202b.png?jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbSIsImtleSI6ImtleTUiLCJleHAiOjE3Mjk4MDkzMzcsIm5iZiI6MTcyOTgwOTAzNywicGF0aCI6Ii8xNTE1MTkyODEvMjkzMTc0NTU1LWE5Y2QxMDg4LTk2OGItNGIxZC1iMjFhLWY1Zjk3ZDBjMjAyYi5wbmc_WC1BbXotQWxnb3JpdGhtPUFXUzQtSE1BQy1TSEEyNTYmWC1BbXotQ3JlZGVudGlhbD1BS0lBVkNPRFlMU0E1M1BRSzRaQSUyRjIwMjQxMDI0JTJGdXMtZWFzdC0xJTJGczMlMkZhd3M0X3JlcXVlc3QmWC1BbXotRGF0ZT0yMDI0MTAyNFQyMjMwMzdaJlgtQW16LUV4cGlyZXM9MzAwJlgtQW16LVNpZ25hdHVyZT1kOTUzYjUwMzU4MzgzNzMxNTlhNzZkMDQ2NTg0ZGE2MGE4MjdmNTM1ZGNhNGYwYjM4MGZjN2M1NDEwMWQ2YWE3JlgtQW16LVNpZ25lZEhlYWRlcnM9aG9zdCJ9.TdvTvbbq3Lv0JYDK6sXbABzeRWNj7JSitpQ115pxjlM" alt="Threads App Screenshot" width="600"/>
 </div>
 
 ## 📋 Table of Contents
